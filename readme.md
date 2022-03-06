@@ -1,3 +1,5 @@
+#this is a basic e-com project 
+
 # install virtual environment
 
 pip install virtualenv
@@ -8,3 +10,4 @@ virtualenv env
 # activate
 
 source env/bin/activate
+
