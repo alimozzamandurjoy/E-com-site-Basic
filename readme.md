@@ -1,4 +1,4 @@
-#this is a basic e-com project 
+### this is a basic e-com project 
 
 # install virtual environment
 
