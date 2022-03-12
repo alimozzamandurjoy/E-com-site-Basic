@@ -25,31 +25,38 @@
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav">
-                            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                            <a class="nav-item nav-link" href="#">Features</a>
-                            <button id="cart" data-html="true" type="button" class="btn btn-secondary"
-                                data-container="body" data-toggle="popover" data-placement="bottom"
-                                data-content="ivamussagittis lacus vel augue laoreet rutrum faucibus.">
-                                Cart(0)
-                            </button>
-                            <a class="nav-item nav-link disabled" href="#">Disabled</a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
 
+        <div class="row ">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <a class="navbar-brand" href="#">ABC Shopping</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <button id="cart" data-html="true" type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+                            sagittis lacus vel augue laoreet rutrum faucibus.">
+                              Cart(0)
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link disabled" href="#">Disabled</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </nav>
+            </div>
         </div>
+
+
 
         <div class="row">
             <div class="col-md-12">
@@ -74,7 +81,7 @@
                 <div class="card">
                     <img src="{{ product.image }}" alt="load img">
                     <div class="card-body">
-                        <div id="nm{{ product.id }}" class="card-title">
+                        <div id="nm{{product.id}}" class="card-title">
                             {{ product.title }}
                         </div>
                         <div class="card-text">
@@ -142,7 +149,7 @@
 
         localStorage.setItem('cart', JSON.stringify(cart));
 
-        document.getElementById("cart").innerHTML = "Cart("+ Object.keys(cart).length +")";
+        document.getElementById("cart").innerHTML = "Cart(" + Object.keys(cart).length + ")";
 
 
     });
@@ -153,14 +160,29 @@
         var cartString = "";
         cartString += "<h5>this is cart</h5>";
         var cartIndex = 1;
+        
+        // for (var x in cart) {
+        //     cartString += cartIndex;
+        //     cartString += document.getElementById("nm" + x).innerHTML + "Qty:" + cart[x] + "</br>";
+        //     cartIndex += 1;
+
+        // }
         for (var x in cart) {
-            cartString += cartIndex;
-            cartString += document.getElementById("nm" + x).innerHTML + "Qty:" + cart[x][0]+ "</br>";
-            cartIndex += 1;
+                cartString += cartIndex;
+                if (document.getElementById("nm" + x) !== null) {
+                cartString += document.getElementById("nm" + x).innerHTML 
+                + "Qty:" + cart[x] + "</br>";
+                
+                cartIndex += 1;
+                }
         }
+        cartString += "<a href='/checkout'><button class = 'btn btn-warning' id= 'checkout'>Check Out</button></a>";
         document.getElementById("cart").setAttribute('data-content', cartString);
         $('[data-toggle="popover"]').popover();
     }
+
+
+    
 
 </script>
 

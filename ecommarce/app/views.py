@@ -1,5 +1,6 @@
 
 from itertools import product
+from unicodedata import name
 from django.shortcuts import render
 from .models import Products
 
@@ -24,3 +25,6 @@ def index(request):
 def detail(request,id):
     product_object= Products.objects.get(id=id)
     return render(request,'app/detail.html',{'product_object':product_object}) 
+
+def checkout(request):
+    return render(request, 'app/checkout.html')

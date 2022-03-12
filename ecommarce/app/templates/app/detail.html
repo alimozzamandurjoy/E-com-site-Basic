@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
     <title>Document</title>
 </head>
+
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-12">
-                        <img src="{{ product_object.image }}" >
+                        <img src="{{ product_object.image }}">
                     </div>
                 </div>
             </div>
@@ -48,4 +53,61 @@
 
     </div>
 </body>
+
+
+<script type="text/javascript">
+    console.log('This is working');
+
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    }
+    else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+    }
+
+    $(document).on('click', '.atc', function () {
+        console.log("The add to cart button is clicked");
+        var item_id = this.id.toString();
+        console.log(item_id);
+
+        if (cart[item_id] != undefined) {
+            quantity = cart[item_id][0] + 1;
+            cart[item_id][0] = quantity;
+            cart[item_id][2] = cart[item_id][2] + parseFloat(document.getElementById("price" + item_id).innerHTML);
+
+
+        }
+        else {
+            quantity = 1;
+            price = parseFloat(document.getElementById("price" + item_id).innerHTML);
+            name = document.getElementById("nm" + item_id).innerHTML;
+            cart[item_id] = [quantity, name, price];
+
+
+        }
+        console.log(cart);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById("cart").innerHTML = "Cart(" + Object.keys(cart).length + ")";
+
+    });
+
+    DisplayCart(cart);
+    function DisplayCart(cart) {
+        var cartString = "";
+        cartString += "<h5>This is your cart</h5>";
+        var cartIndex = 1;
+        for (var x in cart) {
+            cartString += cartIndex;
+            cartString += document.getElementById("nm" + x).innerHTML + "Qty:" + cart[x][0] + "</br>";
+            cartIndex += 1;
+        }
+
+        cartString += "<a href='/checkout'><button class='btn btn-warning' id='checkout'>Checkout</button></a>";
+        document.getElementById("cart").setAttribute('data-content', cartString);
+        $('[data-toggle="popover"]').popover();
+    }
+
+
+</script>
+
 </html>
