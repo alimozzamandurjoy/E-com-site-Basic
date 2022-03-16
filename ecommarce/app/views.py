@@ -28,3 +28,4 @@ def detail(request,id):
 
 def checkout(request):
     return render(request, 'app/checkout.html')
+    
