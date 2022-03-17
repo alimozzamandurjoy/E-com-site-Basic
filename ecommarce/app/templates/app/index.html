@@ -140,10 +140,15 @@
         console.log(item_id);
 
         if (cart[item_id] != undefined) {
-            cart[item_id] = cart[1] + 1;
+            quantity= cart[item_id][0]+1;
+            cart[item_id][0] = quantity;
         }
         else {
-            cart[item_id] = 1;
+            quantity = 1;
+            name = document.getElementById("nm"+item_id).innerHTML;
+            cart[item_id]= [quantity,name];
+
+            
         }
         console.log(cart);
 
@@ -171,7 +176,7 @@
                 cartString += cartIndex;
                 if (document.getElementById("nm" + x) !== null) {
                 cartString += document.getElementById("nm" + x).innerHTML 
-                + "Qty:" + cart[x] + "</br>";
+                + "Qty:" + cart[x][0] + "</br>";
                 
                 cartIndex += 1;
                 }
