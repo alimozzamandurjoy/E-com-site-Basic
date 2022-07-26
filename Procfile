@@ -1,1 +1,1 @@
-web: gunicorn ecommarce.wsgi --log-file -
+web: gunicorn app:app
